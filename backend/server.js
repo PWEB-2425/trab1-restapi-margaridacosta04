@@ -38,6 +38,10 @@ app.use('/cursos', cursosRouter); // ✅ adiciona esta linha
 app.get('/', (req, res) => {
   res.send('API funcionando!');
 });
+// Rota de teste
+app.get('/teste', (req, res) => {
+  res.send('rota teste ok');
+});
 
 // Rota para documentação Swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
