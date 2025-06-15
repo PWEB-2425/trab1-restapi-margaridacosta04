@@ -3,13 +3,6 @@
 // URL da API
 const API_URL = 'https://trab1-restapi-margaridaandleandro.onrender.com';
 
-fetch(`${API_URL}/alunos`)
-  .then(response => response.json())
-  .then(data => {
-    // manipular dados
-  });
-
-
 // Elementos do DOM
 const tabButtons = document.querySelectorAll('.tab-button');
 const tabContents = document.querySelectorAll('.tab-content');
@@ -34,7 +27,7 @@ tabButtons.forEach(button => {
 async function carregarAlunos() {
   tabelaAlunosBody.innerHTML = '<tr><td colspan="5">Carregando...</td></tr>';
   try {
-    const res = await fetch(API_URL);
+    const res = await fetch(`${API_URL}/alunos`);
     if (!res.ok) throw new Error('Erro ao buscar alunos');
     const alunos = await res.json();
     if (alunos.length === 0) {
@@ -62,7 +55,7 @@ async function carregarAlunos() {
 // Preenche o formulário para edição
 async function editarAluno(id) {
   try {
-    const res = await fetch(`${API_URL}/${id}`);
+    const res = await fetch(`${API_URL}/alunos/${id}`);
     if (!res.ok) throw new Error('Aluno não encontrado');
     const aluno = await res.json();
     formAluno.nome.value = aluno.nome;
@@ -91,7 +84,7 @@ formAluno.addEventListener('submit', async (e) => {
   }
   try {
     const method = alunoEditandoId ? 'PUT' : 'POST';
-    const url = alunoEditandoId ? `${API_URL}/${alunoEditandoId}` : API_URL;
+    const url = alunoEditandoId ? `${API_URL}/alunos/${alunoEditandoId}` : `${API_URL}/alunos`;
     const res = await fetch(url, {
       method,
       headers: { 'Content-Type': 'application/json' },
@@ -114,7 +107,7 @@ formAluno.addEventListener('submit', async (e) => {
 async function deletarAluno(id) {
   if (!confirm('Tem certeza que deseja excluir este aluno?')) return;
   try {
-    const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+    const res = await fetch(`${API_URL}/alunos/${id}`, { method: 'DELETE' });
     if (!res.ok) throw new Error('Erro ao excluir aluno');
     alert('Aluno excluído com sucesso!');
     carregarAlunos();
