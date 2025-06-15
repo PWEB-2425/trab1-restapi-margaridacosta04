@@ -1,7 +1,14 @@
 // script.js
 
 // URL da API
-const API_URL = 'http://localhost:5000/alunos';
+const API_URL = 'https://trab1-restapi-margaridaandleandro.onrender.com';
+
+fetch(`${API_URL}/alunos`)
+  .then(response => response.json())
+  .then(data => {
+    // manipular dados
+  });
+
 
 // Elementos do DOM
 const tabButtons = document.querySelectorAll('.tab-button');

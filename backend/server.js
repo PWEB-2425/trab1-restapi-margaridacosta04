@@ -29,7 +29,10 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Rotas da API
 const alunosRouter = require('./routes/alunos');
+const cursosRouter = require('./routes/cursos'); // ✅ adiciona esta linha
+
 app.use('/alunos', alunosRouter);
+app.use('/cursos', cursosRouter); // ✅ adiciona esta linha
 
 // Rota base
 app.get('/', (req, res) => {
