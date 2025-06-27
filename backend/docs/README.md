@@ -8,6 +8,7 @@ Esta documentação explica como aceder e usar a documentação Swagger da API d
 
 A documentação interativa está disponível em:
 
+ Link do Swagger: https://trab1-restapi-margaridaandleandro.onrender.com/api-docs
 
 ---
 
@@ -43,4 +44,4 @@ Swagger é uma ferramenta que gera uma interface gráfica para visualizar, testa
 
 ## Contacto
 
-Margarida Costa — margarida@example.com
+Margarida Costa — cmargarida@ipvc.pt
