@@ -1,153 +1,124 @@
-# Trabalho Prático #1
+Leandro Costa 26618
+Margarida Costa 32425
+****************************************************
+Link da API: https://trab1-restapi-margaridaandleandro.onrender.com
 
-## Consumo e Implementação de APIs RESTful
+ Link do Swagger: https://trab1-restapi-margaridaandleandro.onrender.com/api-docs
 
-### Objetivo Geral
+ Link do frontend: trab1-restapi-margaridacosta04-crzt.vercel.app
+****************************************************
+Instruções de Instalação e Execução
+Pré-requisitos
+Node.js e npm instalados
 
-Consolidar os conhecimentos em desenvolvimento web com foco na criação, consumo e implementação de APIs RESTful utilizando tecnologias do ecossistema JavaScript:
+Conta no MongoDB Atlas (ou MongoDB local)
 
-- Node.js + Express
-- MongoDB / MongoDB Atlas
-- JSON-Server
-- Fetch API
-- Swagger (opcional)
+Navegador (Chrome, Edge, Firefox, etc.)
 
-O projeto simula o ciclo completo de desenvolvimento de uma aplicação web com front-end e back-end separados, incluindo testes e deploy.
+Backend
+Aceda à pasta backend no terminal.
 
----
+Instale as dependências:
 
-## Partes do Trabalho
+npm install
+Crie um ficheiro .env com o seguinte conteúdo (substitua os dados conforme o seu MongoDB):
 
-### Parte 1: Estruturação da Base de Dados (JSON)
+ini
+MONGO_URI=mongodb+srv://<utilizador>:<senha>@<cluster>.mongodb.net/alunosdb
+PORT=5000
+Inicie o servidor com:
 
-- Criar um ficheiro `bd.json` com:
+node server.js
+Se tudo correr bem, verá:
+Servidor a correr em http://localhost:5000
 
-  - Lista de alunos: `nome`, `apelido`, `curso`, `anoCurricular`
-  - Lista de cursos: `nomeDoCurso`
+Frontend
+Aceda à pasta frontend.
 
-- 📁 Diretório sugerido: `/mock-data/`
-- 📄 Entregável: `bd.json`
+Abra o ficheiro index.html no navegador (clicar duas vezes ou arrastar para o browser).
 
----
+Testar com Postman (opcional)
+Enviar pedidos HTTP para http://localhost:5000/alunos com os métodos:
 
-### Parte 2: API Simulada com JSON-Server + Testes
+GET para listar alunos
 
-- Configurar e iniciar `json-server` com `bd.json`
-- Testar os endpoints com Postman (CRUD de alunos, leitura de cursos)
-- Exportar a coleção de testes
+POST para adicionar alunos
 
-- 📁 Diretório sugerido: `/mock-server/`
-- 📄 Entregáveis:
-  - Código de configuração (`package.json`, script json-server)
-  - Coleção `.json` do Postman em `/tests/`
+PUT para atualizar alunos
 
----
+DELETE para remover alunos
+Descriçao da base de dados:
+A base de dados usada neste projeto chama-se "alunosdb" e está alojada no MongoDB Atlas.
+****************************************************
+Coleção principal: alunos
 
-### Parte 3: Interface Web (CRUD de Alunos)
+Cada documento da coleção representa um aluno e tem os seguintes campos:
 
-- Desenvolver uma página web funcional para gerir alunos:
-  - Ver alunos
-  - Adicionar aluno
-  - Editar aluno
-  - Apagar aluno
-- Utilizar `Fetch API` e programação assíncrona
+_id: identificador único gerado automaticamente pelo MongoDB
 
-- 📁 Diretório sugerido: `/frontend/`
-- 📄 Entregável: Página funcional conectada à API simulada
+nome: nome do aluno (ex: Joana)
 
----
+apelido: apelido ou último nome do aluno (ex: Silva)
 
-### Parte 4: API RESTful real (Node.js + Express + MongoDB Atlas)
+curso: nome do curso frequentado (ex: Engenharia Informática)
 
-- Migrar os dados para o MongoDB Atlas
-- Implementar a API Express com endpoints equivalentes ao JSON-server
-- Manter a estrutura RESTful
-- Sugestão : usar mongoose a abordagem MVC (bónus 5%)
+anoCurricular: número do ano curricular (ex: 1, 2, 3)
 
-- 📁 Diretório sugerido: `/backend/`
-- 📄 Entregável: Código funcional da API com instruções
+Exemplo de um documento na coleção:
 
----
+{
+"nome": "Joana",
+"apelido": "Silva",
+"curso": "Engenharia Informática",
+"anoCurricular": 2
+}
+****************************************************
+Descrição da API (rotas)
+A API permite gerir uma lista de alunos através das seguintes rotas:
 
-### Parte 5: Deploy da Aplicação
+GET /alunos
+Retorna todos os alunos da base de dados.
 
-- Fazer deploy do front-end no [Vercel](https://vercel.com)
-- (Opcional) Fazer deploy da API no [Render](https://render.com)
-- Adaptar o front-end para consumir a nova API
+GET /alunos/:id
+Retorna os dados de um aluno específico, com base no seu ID.
 
-📄 Incluir no `README.md`:
+POST /alunos
+Cria um novo aluno.
+Espera um corpo JSON com os campos:
 
-- URL pública do front-end
-- URL da API real
-- 📄 Entregável: Links funcionais no repositório
+*nome
+*apelido
+*curso
+*noCurricular
 
----
+PUT /alunos/:id
+Atualiza os dados de um aluno existente com o ID fornecido.
+Espera um corpo JSON com os campos atualizados.
 
-### Parte 6 (Bonificação): Documentação da API
+DELETE /alunos/:id
+Remove o aluno com o ID fornecido da base de dados.
+****************************************************
+Descrição frontend:
+Permite ao utilizador interagir com a API de alunos de forma visual e amigável. As principais funcionalidades são:
 
-- Utilizar Swagger para documentar os endpoints da API
-- Incluir rota `/api-docs` na aplicação
+Listar Alunos: Mostra todos os alunos registados na base de dados.
 
-- 📁 Diretório sugerido: `/backend/docs/`
-- 📄 Entregável: Swagger funcional e acessível
+Adicionar Aluno: Formulário para inserir um novo aluno.
 
----
+Editar Aluno: Permite atualizar os dados de um aluno existente.
 
-## Organização do Projeto
+Eliminar Aluno: Remove um aluno da base de dados com confirmação.
 
-```text
-projeto-raiz/
-│
-├── /frontend/ ← Interface web (HTML/CSS/JS)
-├── /backend/ ← API RESTful com Node.js + MongoDB
-├── /mock-server/ ← JSON-server configurado
-├── /mock-data/ ← Base de dados JSON original
-├── /tests/ ← Coleção de testes Postman
-├── README.md ← Instruções, links e notas
-└── .gitignore, etc.
-```
+O ficheiro index.html apresenta a interface da aplicação.
+O ficheiro style.css define o aspeto visual com cores suaves (azul claro) e estilo limpo.
+O ficheiro script.js trata da comunicação com a API e da lógica de interface (ex: carregar alunos, lidar com cliques nos botões, enviar dados para a API).
 
----
+A interface funciona ao abrir o index.html num navegador moderno e requer que o backend esteja em execução (por exemplo, em http://localhost:5000).
 
-## Sugestão de Branches
 
-| Branch     | Descrição                        |
-| ---------- | -------------------------------- |
-| `main`     | Versão estável e final           |
-| `dev`      | Desenvolvimento geral            |
-| `frontend` | Interface e interação do usuário |
-| `api`      | API real (Node + MongoDB)        |
-| `deploy`   | Adaptações para Vercel/Render    |
 
----
 
-## Critérios de Avaliação
 
-| Critério                         | Peso |
-| -------------------------------- | ---- |
-| Base de dados JSON correta       | 10%  |
-| API simulada e testada (Postman) | 10%  |
-| Funcionalidade do front-end      | 30%  |
-| Qualidade da API real (Node.js)  | 30%  |
-| Integração front-end/backend     | 10%  |
-| Deploy funcional                 | 10%  |
-| Bonificação (MVC)                | +5%  |
-| Bonificação (Swagger)            | +5%  |
 
----
 
-## Entrega
 
-- Entrega via **GitHub Classroom**.
-- O repositório deve conter:
-  - Código funcional
-  - README.md com instruções claras
-  - Links de deploy (front e opcionalmente back)
-
----
-
-### Repositório Base
-
-Usa o repositório template inicial fornecido no GitHub Classroom.
-# TWT1RESTAPI
-# TRAB1_TEMPLATE
